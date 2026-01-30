@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nepal Election Poll (Demo)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#f2f2f2}
+.card{background:#fff;margin:15px;padding:15px;border-radius:10px}
+.head{display:flex;gap:10px;align-items:center}
+.logo{width:45px;height:45px;object-fit:contain}
+.cand{display:flex;gap:15px;margin-top:10px}
+.cand img{width:120px;height:140px;object-fit:cover;border-radius:8px}
+button{padding:6px 12px;border:none;border-radius:5px;margin:5px}
+.yes{background:#2e7d32;color:#fff}
+.no{background:#c62828;color:#fff}
+.lock{opacity:.6;pointer-events:none}
+</style>
+</head>
+
+<body>
+
+<h2 style="text-align:center">🗳️ Nepal Election Demo Poll</h2>
+<div id="app"></div>
+
+<script>
+const candidates = [
+
+{
+name:"KP Sharma Oli",
+place:"Jhapa-5",
+party:"CPN-UML",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzy6hfa/FB_IMG_1769680812768.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/Screenshot_20260129_154429_Facebook.jpg"
+},
+
+{
+name:"Balen Shah",
+place:"Jhapa-5",
+party:"Rastriya Swatantra Party",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769614270401.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/Screenshot_20260128_211502_TikTok.jpg"
+},
+
+{
+name:"Gagan Thapa",
+place:"Kathmandu-4",
+party:"Nepali Congress",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/Screenshot_20260129_154625_Facebook.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769680853990.jpg"
+},
+
+{
+name:"Pushpa Kamal Dahal (Prachanda)",
+place:"Rukum",
+party:"Maoist Centre",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/Screenshot_20260129_154834_Facebook.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769680916033.jpg"
+},
+
+{
+name:"Rabi Lamichhane",
+place:"Chitwan-2",
+party:"Rastriya Swatantra Party",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769614270401.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769681823672.jpg"
+},
+
+{
+name:"Dr. Swarnim Wagle",
+place:"Tanahu-1",
+party:"Rastriya Swatantra Party",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769614270401.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_161615_TikTok.jpg"
+},
+
+{
+name:"Hari Prasad Bhusal",
+place:"Arghakhanchi",
+party:"Rastriya Swatantra Party",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769614270401.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_161740_TikTok.jpg"
+},
+
+{
+name:"Pitambar Bhusal",
+place:"Arghakhanchi",
+party:"CPN-UML",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzy6hfa/FB_IMG_1769680812768.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_161407_TikTok.jpg"
+},
+
+{
+name:"Renuka Dahal",
+place:"Chitwan-3",
+party:"Maoist Centre",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/Screenshot_20260129_154834_Facebook.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_161246_Facebook.jpg"
+},
+
+{
+name:"Sobita Gautam",
+place:"Chitwan-3",
+party:"Rastriya Swatantra Party",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769614270401.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_161300_Facebook.jpg"
+},
+
+{
+name:"Kulman Ghising",
+place:"Kathmandu-3",
+party:"Independent",
+logo:"https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_160640_Facebook.jpg"
+},
+
+{
+name:"Ganesh Karki",
+place:"Morang-3",
+party:"Rastriya Swatantra Party",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/FB_IMG_1769614270401.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_161532_TikTok.jpg"
+},
+
+{
+name:"Harka Sampang",
+place:"Sunsari-1",
+party:"Shram Sanskriti Party",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_154927_Facebook.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_154946_Facebook.jpg"
+},
+
+{
+name:"Deep Bahadur Shahi",
+place:"Jumla",
+party:"Nepali Congress",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/Screenshot_20260129_154625_Facebook.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_163003_TikTok.jpg"
+},
+
+{
+name:"Khadga Bahadur Shahi",
+place:"Mugu",
+party:"Nepali Congress",
+logo:"https://uploads.onecompiler.io/44b8gygyx/44bzyym7n/Screenshot_20260129_154625_Facebook.jpg",
+photo:"https://uploads.onecompiler.io/44b8gygyx/44bzzgqsb/Screenshot_20260129_163054_TikTok.jpg"
+}
+
+];
+
+const app=document.getElementById("app");
+
+candidates.forEach((c,i)=>{
+const voted=localStorage.getItem("v"+i);
+const y=localStorage.getItem("y"+i)||0;
+const n=localStorage.getItem("n"+i)||0;
+
+app.innerHTML+=`
+<div class="card">
+ <div class="head">
+  <img src="${c.logo}" class="logo">
+  <div><b>${c.party}</b><br><small>${c.place}</small></div>
+ </div>
+
+ <div class="cand">
+  <img src="${c.photo}">
+  <div>
+   <h3>${c.name}</h3>
+   <button class="yes ${voted?'lock':''}" onclick="vote(${i},'y')">YES</button>
+   <button class="no ${voted?'lock':''}" onclick="vote(${i},'n')">NO</button>
+   <p>👍 ${y} | 👎 ${n}</p>
+  </div>
+ </div>
+</div>`;
+});
+
+function vote(i,t){
+ if(localStorage.getItem("v"+i)) return;
+ localStorage.setItem(t+i,(+localStorage.getItem(t+i)||0)+1);
+ localStorage.setItem("v"+i,1);
+ location.reload();
+}
+</script>
+
+</body>
+</html>
